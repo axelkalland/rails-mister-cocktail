@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>Add a new dose to cocktail <%= @cocktail.name %></h1>
+
+
+  <%= simple_form_for([@cocktail, @dose]) do |f| %>
+    <%= f.input :description %>
+    <%= f.association :ingredient, input_html: {class: 'js-input-select2'} %>
+
+    <%= f.submit %>
+  <% end %>
+
+</div>

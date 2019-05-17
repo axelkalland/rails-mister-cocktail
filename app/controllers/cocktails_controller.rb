@@ -1,4 +1,5 @@
 class CocktailsController < ApplicationController
+  class CocktailsController < ApplicationController
   def index
     @cocktails = Cocktail.all
   end
@@ -7,11 +8,15 @@ class CocktailsController < ApplicationController
     @cocktail = Cocktail.new
   end
 
+  def show
+    @cocktail = Cocktail.find(params[:id])
+  end
+
   def create
     @cocktail = Cocktail.new(cocktail_params)
 
     if @cocktail.save
-      redirect_to cocktail(@cocktail)
+      redirect_to cocktails_path
     else
       render :new
     end
@@ -19,13 +24,7 @@ class CocktailsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_cocktail
-    @cocktail = Cocktail.find(params[:id])
-  end
-
-  # Never trust parameters from the scary internet, only allow the white list through.
   def cocktail_params
-    params.require(:cocktail).permit(:name)
+    params.require(:cocktail).permit(:name, :picture_url)
   end
 end
